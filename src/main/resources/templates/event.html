@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Event</title>
+    <th:block th:replace="~{includes/generalScript::head}"> </th:block>
+</head>
+<h1>Event</h1>
+<body>
+<form method="post" th:actions="@{/event-add}" th:object="${eventDto}">
+    <div sec:authorize="isAuthenticated()">
+        <div class="form-group">
+            <label for="inputTitle">Tytuł wydarzenia</label>
+            <input type="text" class="form-control" id="inputTitle" name="title" placeholder="Wpisz nazwę wydarzenia." th:field="*{title}">
+        </div>
+
+        <br>
+
+        <div class="form-group">
+            <label for="inputDateFrom">Data rozpoczęcia</label>
+            <input class="form-control" type="date" id="inputDateFrom" name="from" th:field="*{from}">
+
+        </div>
+
+        <br>
+
+        <div class="form-group">
+            <label for="inputDateTo">Data zakończenia</label>
+            <input class="form-control" type="date" id="inputDateTo" name="to" th:field="*{to}">
+
+        </div>
+
+        <br>
+
+        <div class="form-group">
+            <label for="inputDescription">Opis wydarzenia</label>
+<!--            <input type="text" class="form-control" id="inputDescription" name="description" placeholder="Wpisz opis" th:field="*{description}">-->
+            <textarea type="text" class="form-control" id="inputDescription" placeholder="Wpisz opis" th:field="*{description}"></textarea>
+            <small class="form-text text-muted">Minimalna długość opisu - 20 znaków.</small>
+        </div>
+
+        <button type="submit"
+                class="btn btn-primary" th:href="homePage.html">Dodaj wydarzenie
+        </button>
+    </div>
+</form>
+
+
+<th:block th:replace="~{includes/generalScript::end-of-body}"> </th:block>
+</body>
+</html>

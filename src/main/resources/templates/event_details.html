@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Event details</title>
+    <th:block th:replace="~{includes/generalScript::head}"></th:block>
+</head>
+<body>
+<h1 style="color: blue;">MeetUp</h1>
+<br>
+<div th:replace="includes/loginAndRegistration::loginAndRegistration"></div>
+<div th:replace="includes/addEventAndLoggedUser::addEventAndLoggedUser"></div>
+
+<div th:object="${eventDto}">
+    <div class="form-group">
+        <label for="inputTitle" style="font-style: italic">Tytuł wydarzenia</label>
+        <div th:text="${eventDto.title}" class="form-control" id="inputTitle" name="name"></div>
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="inputDateFrom" style="font-style: italic">Data rozpoczęcia</label>
+        <div th:text="${eventDto.from}" id="inputDateFrom"></div>
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="inputDateTo" style="font-style: italic">Data zakończenia</label>
+        <div th:text="${eventDto.to}" id="inputDateTo"></div>
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="inputDescription" style="font-style: italic">Opis wydarzenia</label>
+        <textarea th:text="${eventDto.description}" class="form-control" id="inputDescription"></textarea>
+    </div>
+    <br>
+    <br>
+    <!--    ----------------------------------------------------------------------------------------------------------->
+    <form method="post" th:actions="@{'/comment-add/' + ${eventDto.getId}}" th:object="${commentDto}" >
+        <div>
+            <div class="form-group">
+                <label for="inputComment" style="font-style: italic">Dodaj komentarz</label>
+                <input class="form-control" type="text" name="content" placeholder="Zaloguj się by dodać komentarz"
+                          id="inputComment">
+                <small class="form-text text-muted">Maksymalna długość komentarza - 500 znaków.</small>
+            </div>
+
+            <button sec:authorize="isAuthenticated()" type="submit"
+                    class="btn btn-primary">
+                Dodaj komentarz
+            </button>
+        </div>
+    </form>
+    <form method="post" th:actions="@{/user-to-event-add}">
+        <div>
+            <button sec:authorize="isAuthenticated()" type="submit"
+                    class="btn btn-primary">
+                Dopisz się do wydarzenia
+            </button>
+        </div>
+    </form>
+    <!--    -------------------------------------------------------------------------------------------------------------->
+    <form>
+        <table class="table table-striped" th:each="listElement : ${commentsList}">
+            <tbody>
+            <tr>
+                <td th:text="${listElement.getContent()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+<th:block th:replace="~{includes/generalScript::end-of-body}"> </th:block>
+</body>
+</html>

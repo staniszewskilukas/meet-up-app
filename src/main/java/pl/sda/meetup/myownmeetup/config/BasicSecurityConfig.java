@@ -1,0 +1,52 @@
+package pl.sda.meetup.myownmeetup.config;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.sql.DataSource;
+
+@Configuration
+@EnableWebSecurity
+public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    DataSource dataSource;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()//to autoryzuje nasze requesty
+                .antMatchers("/restricted").authenticated()//tu mówimy żę jeśli wejdzie ktoś na tą stronę to musi on być zautentykowany
+                .antMatchers("/event").authenticated()
+                .anyRequest()//jaki kolwiek request przyjdzie pozostały poza wymienionymi wyżej
+                .permitAll() //jest wpuszczany bez kontroli
+                .and()
+                .csrf().disable()//
+                .headers().frameOptions().disable()//
+                .and()
+                .formLogin()
+                .loginPage("/sign-in")
+                .loginProcessingUrl("/sign-in")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .failureUrl("/sign-in?error=true")
+                .defaultSuccessUrl("/homePage");
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {//my dosytajemy tu bildera nie tworzymy obiektu, ale musimy mu powiedzieć co ma robić
+        auth.jdbcAuthentication()
+                .dataSource(dataSource)//data source to interfejs z jdbc, jpa z niego też korzysta ale pod spodem, możemy go wyciągnąć tworząc z niego beana//dzięki temu wskazujemy z jakiej bazy ma pobierać dane do autentykacji
+                .usersByUsernameQuery("SELECT u.email, u.password, 1 FROM user u WHERE u.email = ?")//tam powyżej te stringi mają odpowiadać nazwą kolumn w bazie danych//ta jedynka to aktywność naszego użytkownika//wpisujemy tam na sztywno że każdy jest aktywny bo nie mamy jeszcze określonej aktywności
+                .authoritiesByUsernameQuery("SELECT u.email, r.role_name FROM user u JOIN user_role ur ON ur.user_id = u.id JOIN role r ON r.id = ur.role_id WHERE u.email = ?")
+                .passwordEncoder(passwordEncoder);
+    }
+}

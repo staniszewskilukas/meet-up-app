@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign In</title>
+    <th:block th:replace="~{includes/generalScript::head}"> </th:block>
+</head>
+<body>
+<h1>Zaloguj</h1>
+<p th:if="${loginError}" class="error">Zły login lub hasło</p>
+<!-- poniżej jest post bo wysyłamy hasło choćiaż metoda jest bardziej getowa-->
+<form method="post" th:actions="@{/sign-in}">
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Wpisz mail">
+    </div>
+
+    <div class="form-group">
+        <label for="password">Hasło</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Wpisz hasło">
+    </div>
+
+    <button type="submit" class="btn btn-primary" th:href="homePage.html">Zaloguj</button>
+
+</form>
+<th:block th:replace="~{includes/generalScript::end-of-body}"> </th:block>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>RegisterForm</title>
+    <th:block th:replace="~{includes/generalScript::head}"> </th:block>
+</head>
+<h1>Rejestracja</h1>
+<br>
+<body>
+<form method="post" th:actions="@{/registerForm}" th:object="${userDto}">
+
+    <div class="form-group">
+        <label for="inputName">Nazwa użytkownika</label>
+        <input type="text" class="form-control" id="inputName" name="name" placeholder="Wpisz swoją nazwę użytkownika."
+               th:field="*{name}">
+        <span th:errors="*{name}">Invalid username</span>
+        <small class="form-text text-muted">Maksymalna długość - 50 znaków.</small>
+    </div>
+
+    <br>
+
+    <div class="form-group">
+        <label for="inputPassword1">Hasło</label>
+        <input type="password" class="form-control" id="inputPassword1" name="password" placeholder="Wpisz hasło">
+        <small class="form-text text-muted">Hasło – musi mieć przynajmniej 8 znaków, ale nie więcej niż 30.</small>
+    </div>
+
+    <br>
+
+    <div class="form-group">
+        <label for="inputEmail1">Email</label>
+        <input type="email" class="form-control" id="inputEmail1" name="email" placeholder="Wpisz mail">
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary" th:href="homePage.html">Zarejestruj
+    </button>
+
+</form>
+
+<th:block th:replace="~{includes/generalScript::end-of-body}"> </th:block>
+</body>
+</html>

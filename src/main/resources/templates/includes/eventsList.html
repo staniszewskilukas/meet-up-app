@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+</head>
+<body>
+<form method="get" th:actions="@{/event_details.html}">
+    <div th:fragment="eventsList">
+        <div th:if="${not #lists.isEmpty(list)}">
+            <div class="col-sm-2" style="background-color: lightsteelblue">
+                <h3>Lista wydarzeń</h3>
+            </div>
+            <table class="table table-striped">
+<!--                <div th:each="element : ${list}" style="background-color: gainsboro" ; th:width="50">-->
+                <div th:each="element : ${list}" th:width="50">
+                    <br>
+                    <a class="row" th:href="@{'/searchBar/event/' + ${element.getId()}}">
+                        <div class="col" style="font-size:22px; background-color: firebrick;" th:text="${element.title}" name="title">Tytuł
+                        </div>
+                    </a>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-3" name="from" th:text="${element.from}">Data od</div>
+                        <div class="col-sm-9" name="to" th:text="${element.to}">Data do</div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col" name="description" th:text="${element.description}">Opis wydarzenia tu
+                            wstawić
+                        </div>
+                    </div>
+                </div>
+            </table>
+        </div>
+    </div>
+</form>
+</body>
+</html>

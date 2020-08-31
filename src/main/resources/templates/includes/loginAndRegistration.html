@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+</head>
+<body>
+<div th:fragment="loginAndRegistration">
+    <div class="fixed-top">
+        <div class="float-right">
+            <a sec:authorize="!isAuthenticated()" class="btn btn-primary" type="submit" th:href="sign-in.html">Zaloguj się</a>
+            <a sec:authorize="!isAuthenticated()" class="btn btn-primary" type="submit" th:href="registerForm.html">Zarejestruj się</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
