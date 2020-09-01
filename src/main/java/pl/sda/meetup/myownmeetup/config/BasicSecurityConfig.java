@@ -23,14 +23,14 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()//to autoryzuje nasze requesty
-                .antMatchers("/restricted").authenticated()//tu mówimy żę jeśli wejdzie ktoś na tą stronę to musi on być zautentykowany
+        http.authorizeRequests()
+                .antMatchers("/restricted").authenticated()
                 .antMatchers("/event").authenticated()
-                .anyRequest()//jaki kolwiek request przyjdzie pozostały poza wymienionymi wyżej
-                .permitAll() //jest wpuszczany bez kontroli
+                .anyRequest()
+                .permitAll()
                 .and()
-                .csrf().disable()//
-                .headers().frameOptions().disable()//
+                .csrf().disable()
+                .headers().frameOptions().disable()
                 .and()
                 .formLogin()
                 .loginPage("/sign-in")
@@ -38,7 +38,11 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .failureUrl("/sign-in?error=true")
-                .defaultSuccessUrl("/homePage");
+                .defaultSuccessUrl("/homePage")
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/homePage");
     }
 
     @Override

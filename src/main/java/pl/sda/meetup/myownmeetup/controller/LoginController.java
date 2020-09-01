@@ -43,7 +43,7 @@ public class LoginController {
             errorMessge = "You have been successfully logged out !!";
         }
         model.addAttribute("errorMessge", errorMessge);
-        return "homePage";
+        return "/homePage";
     }
 
     // Login form with error
