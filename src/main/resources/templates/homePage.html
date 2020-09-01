@@ -8,7 +8,13 @@
     <th:block th:replace="~{includes/generalScript::head}"> </th:block>
 </head>
 <body>
-<h1 style="color: blue;">MeetUp</h1>
+<!--<h1 style="color: blue;">MeetUp</h1>-->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="homePage.html"
+           style="font-size:32px;font-weight:bolder;font-family:Georgia,serif">MeetUp</a>
+    </div>
+</nav>
 <div th:replace="includes/searchBar::searchBar"></div>
 <br>
 <div th:replace="includes/loginAndRegistration::loginAndRegistration"></div>

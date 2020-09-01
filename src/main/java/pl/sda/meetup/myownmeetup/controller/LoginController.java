@@ -15,21 +15,11 @@ public class LoginController {
     PasswordEncoder passwordEncoder;
 
 
-    @GetMapping({"/sign-in","/sign-in.html"})
+    @GetMapping("/sign-in.html")
     public String getSignIn() {
-        return "sign-in";
+        return "sign-in.html";
     }
 
-//    @PostMapping({"/sign-in","/sign-in.html"})
-//    public String loginSuccess(Model model){
-//model.addAllAttributes("login-process",)
-//    }
-
-//    @PostMapping({"/sign-in","/sign-in.html"})
-//    public String afterUserCreation(Model model) {
-//     model.addAllAttributes()
-//        return "homePage";
-//    }
 
     @RequestMapping(value = {"/sign-in","/sign-in.html"}, method = RequestMethod.POST)
     public String loginPage(@RequestParam(value = "error", required = false) String error,
@@ -43,7 +33,7 @@ public class LoginController {
             errorMessge = "You have been successfully logged out !!";
         }
         model.addAttribute("errorMessge", errorMessge);
-        return "/homePage";
+        return "redirect:/homePage";
     }
 
     // Login form with error

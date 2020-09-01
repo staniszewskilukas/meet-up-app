@@ -1,7 +1,6 @@
 package pl.sda.meetup.myownmeetup.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -33,16 +32,14 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()
                 .and()
                 .formLogin()
-                .loginPage("/sign-in")
-                .loginProcessingUrl("/sign-in")
+                .loginPage("/sign-in.html")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .failureUrl("/sign-in?error=true")
-                .defaultSuccessUrl("/homePage")
+                .defaultSuccessUrl("/homePage.html")
                 .and()
                 .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/homePage");
+                .logoutSuccessUrl("/homePage.html");
     }
 
     @Override

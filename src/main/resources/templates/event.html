@@ -8,7 +8,7 @@
     <title>Event</title>
     <th:block th:replace="~{includes/generalScript::head}"> </th:block>
 </head>
-<h1>Event</h1>
+<h1 th:href="homePage.html">Event</h1>
 <body>
 <form method="post" th:actions="@{/event-add}" th:object="${eventDto}">
     <div sec:authorize="isAuthenticated()">
