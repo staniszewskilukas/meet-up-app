@@ -8,19 +8,13 @@
 </head>
 <body>
 <div th:fragment="searchBar">
-<!--    <form class="form-inline active-cyan-4" th:actions="@{/searchResults}" method="get">-->
-<!--        <div class="form-group">-->
-<!--            <label for="title"></label>-->
-<!--            <input th:value="${title}" name="title" class="form-control form-control-sm mr-3 w-75"-->
-<!--                   type="text" id="title" aria-label="search">-->
-<!--        </div>-->
-<!--        <button class="btn btn-primary" type="submit" href="searchResult">Szukaj</button>-->
-<!--    </form>-->
     <form class="form-inline active-cyan-3 active-cyan-4" th:actions="@{/searchResults}" method="get">
         <i class="fas fa-search" aria-hidden="true"></i>
-        <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
-               aria-label="Search" th:value="${title}" name="title">
-        <button class="btn btn-primary" type="submit" href="searchResult">Szukaj</button>
+        <div class="col-md-8">
+            <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Wpisz szukany event"
+                   aria-label="Search" th:value="${title}" name="title">
+            <button class="btn btn-primary" type="submit" href="searchResult">Szukaj</button>
+        </div>
     </form>
 </div>
 </body>

@@ -6,25 +6,23 @@
     <th:block th:replace="~{includes/generalScript::head}"></th:block>
 </head>
 <body>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <a class="navbar-brand" th:href="homePage.html"
-           style="font-size:32px;font-weight:bolder;font-family:Georgia,serif">MeetUp</a>
-    </div>
-</nav>
-<p th:if="${loginError}" class="error">Zły login lub hasło</p>
 <form method="post" th:actions="@{/sign-in.html}">
-    <div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
-                   placeholder="Wpisz mail">
+    <p th:if="${loginError}" class="error">Zły login lub hasło</p>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="homePage.html"
+               style="font-size:32px;font-weight:bolder;font-family:Georgia,serif">MeetUp</a>
         </div>
-
-        <div class="form-group">
-            <label for="password">Hasło</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Wpisz hasło">
-        </div>
+    </nav>
+    <div class="form-group, col-md-6">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
+               placeholder="Wpisz mail">
+    </div>
+    <div class="form-group, col-md-6">
+        <label for="password">Hasło</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Wpisz hasło">
+        <br>
         <button type="submit" class="btn btn-primary" th:href="homePage.html">Zaloguj</button>
     </div>
 </form>
