@@ -18,9 +18,7 @@ public class EventDtoToEventModel implements Converter<EventDto, EventModel> {
 
     @Override
     public EventModel convert(EventDto eventDto) {
-        if (eventDto == null) {
-            return null;
-        }
+
         final EventModel eventModel = new EventModel();
         eventModel.setTitle(eventDto.getTitle());
         eventModel.setFrom(eventDto.getFrom());
