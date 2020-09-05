@@ -3,16 +3,16 @@ package pl.sda.meetup.myownmeetup.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.sda.meetup.myownmeetup.dto.CommentDto;
 import pl.sda.meetup.myownmeetup.dto.EventDto;
+import pl.sda.meetup.myownmeetup.dto.UserDto;
 import pl.sda.meetup.myownmeetup.service.CommentServiceImpl;
 import pl.sda.meetup.myownmeetup.service.EventServiceImpl;
 import pl.sda.meetup.myownmeetup.service.UserServiceImpl;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Controller
@@ -28,19 +28,25 @@ public class EventController {
         this.commentService = commentService;
     }
 
-    @GetMapping({"/event", "/event.html"})
+    @GetMapping("/event")
     public String addEvent(Model model) {
         EventDto eventDto = new EventDto();
         model.addAttribute("eventDto", eventDto);
         return "event";
     }
 
-    @PostMapping("/event-add")
-    public String handleEventAdding(@ModelAttribute @Valid EventDto eventDto,
-                                    BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "event";
-        }
+//    @PostMapping({"/eventAdd","eventAdd","/event.html"})
+//    public String handleEventAdding(@ModelAttribute @Valid EventDto eventDto,
+//                                    BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            System.out.println("Wal sie");
+//        }
+//        eventService.save(eventDto);
+//        return "redirect:/homePage";
+//    }
+
+    @RequestMapping(value = "/eventAdd", method = RequestMethod.POST)
+    public String handleEventAdding(@ModelAttribute EventDto eventDto) {
         eventService.save(eventDto);
         return "redirect:/homePage";
     }

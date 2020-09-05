@@ -1,5 +1,6 @@
 package pl.sda.meetup.myownmeetup.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.sda.meetup.myownmeetup.converters.EventDtoToEventModel;
 import pl.sda.meetup.myownmeetup.converters.EventModelToEventDto;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 @Service
+@Slf4j
 public class EventServiceImpl implements EventService {
 
     private final EventRepository eventRepository;
@@ -34,7 +36,9 @@ public class EventServiceImpl implements EventService {
     }
 
     public List<EventModel> findAllEvents() {
-        return eventRepository.findAll();
+        List<EventModel> all = eventRepository.findAll();
+//        log.info("To jest wynik metody findAllEvents, rozmiar zwracanej listy " + all.size());
+        return all;
     }
 
     public List<EventModel> listOfEventsDatesValidation(List<EventModel> eventModels) {
@@ -46,12 +50,14 @@ public class EventServiceImpl implements EventService {
                 activeEvents.add(eventModel);
             }
         }
+//        log.info("To jest wynik metody listOfEventsDatesValidation zwraca listę aktywnych eventów rozmiar listy " + activeEvents.size() + "pierwszy ele z listy " + activeEvents.get(0));
         return activeEvents;
     }
 
     public List<EventModel> sortsListOfEventsModels(List<EventModel> eventModels) {
         Comparator<EventModel> eventModelComparator = Comparator.comparing(EventModel::getFrom);
         eventModels.sort(eventModelComparator);
+//        log.info("To jest wynik metody sortsListOfEventsModels, onaz sortuje, rozmiar listy " + eventModels.size() + "pierwszy ele z listy " + eventModels.get(0));
         return eventModels;
     }
 
@@ -60,6 +66,10 @@ public class EventServiceImpl implements EventService {
         for (EventModel eventModel : eventModels) {
             eventDtosList.add(eventModelToEventDto.convert(eventModel));
         }
+//        if(eventDtosList.get(0).getClass()==EventDto.class){
+//            log.info("To jest EventDTO");
+//        }
+//        log.info("To jest wynik metody getListOfEventsDto, rozmiar listy " + eventDtosList.size()  + "pierwszy ele z listy " + eventDtosList.get(0));
         return eventDtosList;
     }
 

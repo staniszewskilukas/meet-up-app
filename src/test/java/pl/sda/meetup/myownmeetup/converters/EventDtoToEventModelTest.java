@@ -29,5 +29,6 @@ public class EventDtoToEventModelTest {
         EventModel eventModel = eventDtoToEventModel.convert(eventDto);
         assertNotNull(eventModel);
         assertSame(eventModel.getClass(), EventModel.class);
+        assertEquals(1, (long) eventModel.getId());
     }
 }

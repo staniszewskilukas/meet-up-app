@@ -1,5 +1,6 @@
 package pl.sda.meetup.myownmeetup.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,6 +11,7 @@ import pl.sda.meetup.myownmeetup.dto.UserDto;
 import pl.sda.meetup.myownmeetup.repository.UserRepository;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -28,8 +30,9 @@ public class UserServiceImpl implements UserService {
         userRepository.save(userModel);
     }
 
-    public String getLoggedUserName() {//metoda zwraca nam użytkownika zalogowanego
+    public String getLoggedUserName() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        log.info("Tojest wynik metody zwracającej zalogowanego użytkownika " + authentication.getName());
         if (authentication instanceof AnonymousAuthenticationToken) {
             return null;
         }

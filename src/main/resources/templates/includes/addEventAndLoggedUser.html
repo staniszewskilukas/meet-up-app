@@ -10,7 +10,7 @@
         <div class="fixed-top">
             <div class="float-right">
                 Zalogowany jako: <span th:text="${userEmail}">Username</span>
-                <a sec:authorize="isAuthenticated()" class="btn btn-primary" type="submit" th:href="event.html">Dodaj wydarzenie</a>
+                <a sec:authorize="isAuthenticated()" class="btn btn-primary" type="submit" th:href="event">Dodaj wydarzenie</a>
             </div>
         </div>
     </div>

@@ -29,6 +29,6 @@ public class EventDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate to;
 
-    @Size(min =5, message = "Opis musi mieć przynajmniej 20 znaków.")//todo zmienić ilość znaków na 20
+    @Size(min =5, message = "Opis musi mieć przynajmniej 20 znaków.")
     private String description;
 }

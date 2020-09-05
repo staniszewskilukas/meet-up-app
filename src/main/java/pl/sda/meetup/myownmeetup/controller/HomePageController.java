@@ -30,11 +30,6 @@ public class HomePageController {
                                 eventService.listOfEventsDatesValidation(
                                         eventService.findAllEvents()))));
         model.addAttribute("userEmail", userService.getLoggedUserName());
-//        List<EventDto> listOfEventsDto = eventService.getListOfEventsDto(
-//                eventService.sortsListOfEventsModels(
-//                        eventService.listOfEventsDatesValidation(
-//                                eventService.findAllEvents())));
-//        log.info("To jest lista wyciągana do indexPage: " + listOfEventsDto.get(0).getTitle() );
         return "homePage";
     }
 
