@@ -4,34 +4,55 @@
 <head>
 </head>
 <body>
+<!--<form method="get" th:actions="@{/event_details.html}">-->
+<!--    <div th:fragment="eventsList">-->
+<!--        <div th:if="${not #lists.isEmpty(list)}">-->
+<!--            <div class="container-fluid" style="margin-left:28px;">-->
+<!--                <div class="col-sm-3,float-center" style="background-color: lightsteelblue">-->
+<!--                    <p class="float-center" style="font-size:28px">Lista wydarzeń</p>-->
+<!--                </div>-->
+<!--                <table class="table table-striped">-->
+<!--                    <div th:each="element : ${list}" th:width="50">-->
+<!--                        <br>-->
+<!--                        <a class="row" th:href="@{'/searchBar/event/' + ${element.getId()}}">-->
+<!--                            <div class="col-sm-8" style="font-size:22px; background-color: firebrick;"-->
+<!--                                 th:text="${element.title}" name="title">Tytuł-->
+<!--                            </div>-->
+<!--                        </a>-->
+<!--                        <br>-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-sm-3" name="from" th:text="${element.from}">Data od</div>-->
+<!--                            <div class="col-sm-9" name="to" th:text="${element.to}">Data do</div>-->
+<!--                        </div>-->
+<!--                        <br>-->
+<!--                        <div class="row">-->
+<!--                            <div class="col" name="description" th:text="${element.description}">Opis wydarzenia tu-->
+<!--                                wstawić-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </table>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</form>-->
 <form method="get" th:actions="@{/event_details.html}">
-    <div th:fragment="eventsList">
-        <div th:if="${not #lists.isEmpty(list)}">
-            <div class="col-sm-2" style="background-color: lightsteelblue">
-                <h3>Lista wydarzeń</h3>
-            </div>
-            <table class="table table-striped">
-<!--                <div th:each="element : ${list}" style="background-color: gainsboro" ; th:width="50">-->
-                <div th:each="element : ${list}" th:width="50">
-                    <br>
-                    <a class="row" th:href="@{'/searchBar/event/' + ${element.getId()}}">
-                        <div class="col" style="font-size:22px; background-color: firebrick;" th:text="${element.title}" name="title">Tytuł
-                        </div>
-                    </a>
-                    <br>
-                    <div class="row">
-                        <div class="col-sm-3" name="from" th:text="${element.from}">Data od</div>
-                        <div class="col-sm-9" name="to" th:text="${element.to}">Data do</div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col" name="description" th:text="${element.description}">Opis wydarzenia tu
-                            wstawić
-                        </div>
-                    </div>
-                </div>
-            </table>
-        </div>
+    <div th:fragment="eventsList" th:if="${not #lists.isEmpty(list)}" th:each="element : ${list}">
+        <table class="table table-striped">
+            <tr>
+                <th>Lista wydarzeń</th>
+            </tr>
+            <tr>
+                <th th:href="@{'/searchBar/event/' + ${element.getId()}}" th:text="${element.title}" name="title"></th>
+            </tr>
+            <tr>
+                <td name="from" th:text="${element.from}"></td>
+                <td name="to" th:text="${element.to}"></td>
+            </tr>
+            <tr>
+                <td name="description" th:text="${element.description}"></td>
+            </tr>
+        </table>
     </div>
 </form>
 </body>
