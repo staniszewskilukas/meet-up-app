@@ -32,13 +32,13 @@ public class EventServiceImpl implements EventService {
     @Override
     public void save(EventDto eventDto) {
         EventModel eventModel = eventDtoToEventModel.convert(eventDto);
-        eventRepository.save(eventModel);
+        if(eventModel!=null){
+            eventRepository.save(eventModel);
+        }
     }
 
     public List<EventModel> findAllEvents() {
-        List<EventModel> all = eventRepository.findAll();
-//        log.info("To jest wynik metody findAllEvents, rozmiar zwracanej listy " + all.size());
-        return all;
+        return eventRepository.findAll();
     }
 
     public List<EventModel> listOfEventsDatesValidation(List<EventModel> eventModels) {
@@ -50,14 +50,12 @@ public class EventServiceImpl implements EventService {
                 activeEvents.add(eventModel);
             }
         }
-//        log.info("To jest wynik metody listOfEventsDatesValidation zwraca listę aktywnych eventów rozmiar listy " + activeEvents.size() + "pierwszy ele z listy " + activeEvents.get(0));
         return activeEvents;
     }
 
     public List<EventModel> sortsListOfEventsModels(List<EventModel> eventModels) {
         Comparator<EventModel> eventModelComparator = Comparator.comparing(EventModel::getFrom);
         eventModels.sort(eventModelComparator);
-//        log.info("To jest wynik metody sortsListOfEventsModels, onaz sortuje, rozmiar listy " + eventModels.size() + "pierwszy ele z listy " + eventModels.get(0));
         return eventModels;
     }
 
@@ -66,10 +64,6 @@ public class EventServiceImpl implements EventService {
         for (EventModel eventModel : eventModels) {
             eventDtosList.add(eventModelToEventDto.convert(eventModel));
         }
-//        if(eventDtosList.get(0).getClass()==EventDto.class){
-//            log.info("To jest EventDTO");
-//        }
-//        log.info("To jest wynik metody getListOfEventsDto, rozmiar listy " + eventDtosList.size()  + "pierwszy ele z listy " + eventDtosList.get(0));
         return eventDtosList;
     }
 
@@ -89,6 +83,4 @@ public class EventServiceImpl implements EventService {
     public EventModel findEventModelById(Long id) {
         return eventRepository.findById(id).orElseThrow(() -> new NotFoundException("Szukane wydarzenie nie zostało znalezione"));
     }
-
-
 }

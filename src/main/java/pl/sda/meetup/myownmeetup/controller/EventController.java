@@ -3,16 +3,16 @@ package pl.sda.meetup.myownmeetup.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import pl.sda.meetup.myownmeetup.dto.CommentDto;
 import pl.sda.meetup.myownmeetup.dto.EventDto;
-import pl.sda.meetup.myownmeetup.dto.UserDto;
 import pl.sda.meetup.myownmeetup.service.CommentServiceImpl;
 import pl.sda.meetup.myownmeetup.service.EventServiceImpl;
 import pl.sda.meetup.myownmeetup.service.UserServiceImpl;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Controller
@@ -35,18 +35,12 @@ public class EventController {
         return "event";
     }
 
-//    @PostMapping({"/eventAdd","eventAdd","/event.html"})
-//    public String handleEventAdding(@ModelAttribute @Valid EventDto eventDto,
-//                                    BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) {
-//            System.out.println("Wal sie");
-//        }
-//        eventService.save(eventDto);
-//        return "redirect:/homePage";
-//    }
-
-    @RequestMapping(value = "/eventAdd", method = RequestMethod.POST)
-    public String handleEventAdding(@ModelAttribute EventDto eventDto) {
+    @PostMapping("/event")
+    public String handleEventAdding(@ModelAttribute @Valid EventDto eventDto,
+                                    BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("Wal sie");//TODO
+        }
         eventService.save(eventDto);
         return "redirect:/homePage";
     }
@@ -65,8 +59,7 @@ public class EventController {
         if (bindingResult.hasErrors()) {
             return "error";
         }
-
-        commentService.save(commentDto,eventDtoId);
+        commentService.save(commentDto, eventDtoId);
         return "redirect:/event_details";
     }
 }

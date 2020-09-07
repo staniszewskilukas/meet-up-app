@@ -26,10 +26,7 @@ public class UserDtoToUserModel implements Converter<UserDto, UserModel> {
 
     @Override
     public UserModel convert(UserDto userDto) {
-        if (userDto == null) {
-            return null;
-//TODO tu wypadałoby zmienić, spytać Jarka. Zwrócić jakiś błąd i komunikat by należało zapewne
-        }
+        
         final UserModel userModel = new UserModel();
         userModel.setName(userDto.getName());
         userModel.setEmail(userDto.getEmail());

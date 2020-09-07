@@ -14,7 +14,6 @@ public class LoginController {
 
     PasswordEncoder passwordEncoder;
 
-
     @GetMapping("/sign-in.html")
     public String getSignIn() {
         return "sign-in.html";
@@ -36,7 +35,6 @@ public class LoginController {
         return "redirect:/homePage";
     }
 
-    // Login form with error
     @RequestMapping("/error.html")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);

@@ -6,7 +6,6 @@ import pl.sda.meetup.myownmeetup.converters.CommentModelToCommentDto;
 import pl.sda.meetup.myownmeetup.dao.CommentModel;
 import pl.sda.meetup.myownmeetup.dao.EventModel;
 import pl.sda.meetup.myownmeetup.dto.CommentDto;
-import pl.sda.meetup.myownmeetup.dto.EventDto;
 import pl.sda.meetup.myownmeetup.exception.NotFoundException;
 import pl.sda.meetup.myownmeetup.repository.CommentRepository;
 

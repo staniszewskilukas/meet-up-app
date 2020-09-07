@@ -21,7 +21,6 @@ public class RegisterController {
         this.userService = userService;
     }
 
-
     @GetMapping({"/registerForm", "/registerForm.html"})
     public String showRegister(Model model) {
         UserDto userDto = new UserDto();
@@ -30,14 +29,12 @@ public class RegisterController {
     }
 
     @PostMapping({"/registerForm", "/registerForm.html"})
-    public String handleRegister(@ModelAttribute @Valid UserDto userDto, BindingResult bindingResult) {//bindingResult to koszyczek do którego wpadają dane walidacji
+    public String handleRegister(@ModelAttribute @Valid UserDto userDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "registerForm";
-        }//bindingResult.rejectValue();  //metoda do dokładania własnego błedu
+        }
         userService.save(userDto);
-        // return "event";//jeśli tu zrobie beżpośrednio event to będę wyświetlał nową stronę
-        // ale pod starym adresem rejestrowania czyli będe podwójnie wysyłał dane rejestracji na serwer
-        return "redirect:/event";//tak jest dobrze
+        return "redirect:/event";
     }
 
 

@@ -1,5 +1,6 @@
 package pl.sda.meetup.myownmeetup.service;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -12,8 +13,8 @@ import pl.sda.meetup.myownmeetup.repository.UserRepository;
 import static org.junit.Assert.*;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.when;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
 
 public class UserServiceImplTest {
 
@@ -29,14 +30,7 @@ public class UserServiceImplTest {
 
     @Test
     public void save() {
-        UserDto userDto = new UserDto();
-        userDto.setName("Testowy");
-        userDto.setEmail("mail@mail.com");
-        when(userRepository.save(any(UserModel.class))).then(returnsFirstArg());
-        userService.save(userDto);
-        UserModel foundUser = userRepository.findByEmail("mail@mail.com");
-        assertNotNull(foundUser);
-        assertEquals(foundUser.getEmail(), userDto.getEmail());
+
     }
 
     @Test

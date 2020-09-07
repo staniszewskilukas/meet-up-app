@@ -10,9 +10,7 @@ public class UserModelToUserDto implements Converter<UserModel, UserDto> {
 
     @Override
     public UserDto convert(UserModel source) {
-        if(source==null){
-            return null;
-        }
+
         final UserDto userDto = new UserDto();
         userDto.setName(source.getName());
         userDto.setEmail(source.getEmail());

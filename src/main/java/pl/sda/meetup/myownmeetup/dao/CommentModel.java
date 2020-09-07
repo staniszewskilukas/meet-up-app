@@ -20,7 +20,7 @@ public class CommentModel {
 
     private LocalDateTime addingData;
 
-    @Size(max = 500)//TODO czy to jest tu potzrebne jeśli jest na DTO i czym się różni w obsłudze
+    @Size(max = 500)
     private String content;
 
     @ManyToOne

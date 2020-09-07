@@ -43,7 +43,7 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {//my dosytajemy tu bildera nie tworzymy obiektu, ale musimy mu powiedzieć co ma robić
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)//data source to interfejs z jdbc, jpa z niego też korzysta ale pod spodem, możemy go wyciągnąć tworząc z niego beana//dzięki temu wskazujemy z jakiej bazy ma pobierać dane do autentykacji
                 .usersByUsernameQuery("SELECT u.email, u.password, 1 FROM user u WHERE u.email = ?")//tam powyżej te stringi mają odpowiadać nazwą kolumn w bazie danych//ta jedynka to aktywność naszego użytkownika//wpisujemy tam na sztywno że każdy jest aktywny bo nie mamy jeszcze określonej aktywności

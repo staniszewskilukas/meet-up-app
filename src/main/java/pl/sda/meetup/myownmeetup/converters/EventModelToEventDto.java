@@ -10,9 +10,7 @@ public class EventModelToEventDto implements Converter<EventModel, EventDto>{
 
     @Override
     public EventDto convert(EventModel eventModel) {
-        if(eventModel==null){
-            return null;
-        }
+
         final EventDto eventDto = new EventDto();
         eventDto.setId(eventModel.getId());
         eventDto.setTitle(eventModel.getTitle());

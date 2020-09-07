@@ -9,7 +9,7 @@
     <th:block th:replace="~{includes/generalScript::head}"></th:block>
 </head>
 <body>
-<form method="post" th:actions="@{/eventAdd}" th:object="${eventDto}">
+<form method="post" th:actions="@{/event}" th:object="${eventDto}">
     <div class="container-fluid">
         <nav class="navbar navbar-inverse">
             <div class="float-left">
@@ -33,7 +33,8 @@
 
             <div class="form-group, col-md-6">
                 <label for="inputDateFrom">Data rozpoczęcia</label>
-                <input class="form-control" type="date" id="inputDateFrom" name="from" th:field="*{from}">
+                <input class="form-control" type="date" id="inputDateFrom" name="from"
+                       th:field="*{from}">
 
             </div>
 
@@ -41,7 +42,8 @@
 
             <div class="form-group, col-md-6">
                 <label for="inputDateTo">Data zakończenia</label>
-                <input class="form-control" type="date" id="inputDateTo" name="to" th:field="*{to}">
+                <input class="form-control" type="date" id="inputDateTo" name="to"
+                       th:field="*{to}">
 
             </div>
 
