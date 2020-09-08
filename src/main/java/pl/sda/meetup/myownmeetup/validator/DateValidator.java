@@ -11,11 +11,9 @@ public class DateValidator {
 
         LocalDate currentDate = LocalDate.now();
 
-        if(from==null && to==null) {
+        if(from==null) {
             return false;
-        }else if(from==null){
-            return false;
-        } else if(currentDate.isAfter(from)||currentDate.isAfter(to)){
+        } else if(currentDate.isAfter(to)){
             return false;
         }else if(from.isAfter(to)){
             return false;
