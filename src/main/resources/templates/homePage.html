@@ -8,14 +8,18 @@
     <th:block th:replace="~{includes/generalScript::head}"></th:block>
 </head>
 <body>
-<!--<h1 style="color: blue;">MeetUp</h1>-->
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="float-left">
             <a class="navbar-brand" th:href="homePage.html"
-               style="font-size:32px;font-weight:bolder;font-family:Georgia,serif">MeetUp</a>
+               style="font-size:32px;font-weight:bolder;font-family:Georgia,serif;">MeetUp</a>
         </div>
+<!--        <div class="float-center">-->
+<!--            Zalogowany jako: <span th:text="${userEmail}">Username</span>-->
+<!--            <a sec:authorize="isAuthenticated()" class="btn btn-primary" type="submit" th:href="event">Dodaj wydarzenie</a>-->
+<!--        </div>-->
         <div class="float-right">
+            <a sec:authorize="isAuthenticated()" class="btn btn-primary" type="submit" th:href="event">Dodaj wydarzenie</a>
             <a sec:authorize="!isAuthenticated()" class="btn btn-primary" type="submit" th:href="sign-in.html">Zaloguj
                 się</a>
             <a sec:authorize="!isAuthenticated()" class="btn btn-primary" type="submit" th:href="registerForm.html">Zarejestruj
@@ -28,12 +32,8 @@
 </nav>
 <div th:replace="includes/searchBar::searchBar"></div>
 <br>
-<div th:replace="includes/addEventAndLoggedUser::addEventAndLoggedUser"></div>
+<!--<div th:replace="includes/addEventAndLoggedUser::addEventAndLoggedUser"></div>-->
 <div th:replace="includes/eventsList::eventsList"></div>
-
-<!--<div class="form-group">-->
-<!--    <button type="submit" class="btn btn-primary" th:href="logout.html">Zaloguj</button>-->
-<!--</div>-->
 <th:block th:replace="~{includes/generalScript::end-of-body}"></th:block>
 </body>
 </html>
