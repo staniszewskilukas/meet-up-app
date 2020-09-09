@@ -45,9 +45,17 @@ public class EventController {
         return "redirect:/homePage";
     }
 
-    @GetMapping({"/searchBar/event/{eventDtoId}"})
+//    @GetMapping({"/searchBar/event/{eventDtoId}"})
+//    public String showEventDetails(@PathVariable Long eventDtoId, Model model) {
+//        model.addAttribute("eventDto", eventService.findEventDtoById(eventDtoId));
+//        model.addAttribute("userEmail", userService.getLoggedUserName());
+//        model.addAttribute("commentsList", commentService.findAllCommentsByEventId(eventDtoId));
+//        return "event_details";
+//    }
+
+    @GetMapping({"/event_details/{eventDtoId}"})
     public String showEventDetails(@PathVariable Long eventDtoId, Model model) {
-//        model.addAttribute("eventDto", eventService.findEventById(eventDtoId));
+        model.addAttribute("eventDto", eventService.findEventDtoById(eventDtoId));
         model.addAttribute("userEmail", userService.getLoggedUserName());
         model.addAttribute("commentsList", commentService.findAllCommentsByEventId(eventDtoId));
         return "event_details";

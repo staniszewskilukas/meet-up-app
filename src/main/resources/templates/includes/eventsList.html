@@ -7,12 +7,16 @@
 <form method="get" th:actions="@{/event_details.html}">
     <div th:fragment="eventsList" th:if="${not #lists.isEmpty(list)}">
         <div>
-            <p style="text-align:center; font-size:28px; font-family:Georgia,serif;color:rgb(0,100,255);">Lista wydarzeń</p>
+            <p style="text-align:center; font-size:28px; font-family:Georgia,serif;color:rgb(0,100,255);">Lista
+                wydarzeń</p>
         </div>
         <div th:each="element : ${list}">
             <table class="table table-dark table-striped" style="margin-right:150px;">
                 <tr>
-                    <th th:href="@{'/searchBar/event/' + ${element.getId()}}" th:text="${element.title}" colspan="4" width="150px" style="text-align:center"></th>
+                    <th colspan="4" style="text-align:center" width="150px">
+                        <a th:href="@{'/event_details/' + ${element.getId()}}"
+                           th:text="${element.title}"> </a>
+                    </th>
                 </tr>
                 <tr>
                     <td style="text-align:left">Początek wydarzenia:</td>
@@ -21,7 +25,7 @@
                     <td th:text="${element.to}" style="text-align:left"></td>
                 </tr>
                 <tr>
-                    <td  th:text="${element.description}" colspan="4"></td>
+                    <td th:text="${element.description}" colspan="4"></td>
                 </tr>
             </table>
         </div>
