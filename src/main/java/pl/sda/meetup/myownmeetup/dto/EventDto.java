@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -23,11 +23,11 @@ public class EventDto {
 
     @NotNull(message = "Pole nie może być puste")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate from;
+    private LocalDateTime from;
 
     @NotNull(message = "Pole nie może być puste")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate to;
+    private LocalDateTime to;
 
     @Size(min =5, message = "Opis musi mieć przynajmniej 20 znaków.")
     private String description;

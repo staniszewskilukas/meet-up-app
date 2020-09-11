@@ -22,8 +22,8 @@
                 się</a>
             <a sec:authorize="!isAuthenticated()" class="btn btn-primary" type="submit" th:href="registerForm.html">Zarejestruj
                 się</a>
-            <a sec:authorize="isAuthenticated()" type="submit" class="btn btn-primary" th:href="@{/logout}"
-               th:text="Wyloguj:+'  '+${userEmail}">Wyloguj</a>
+            <a sec:authorize="isAuthenticated()" type="submit" class="btn btn-primary" th:href="@{/logout}">Wyloguj</a>
+<!--               th:text="Wyloguj:+'  '+${userEmail}"-->
         </div>
     </div>
 </nav>

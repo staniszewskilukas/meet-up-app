@@ -8,7 +8,7 @@ import pl.sda.meetup.myownmeetup.dao.EventModel;
 import pl.sda.meetup.myownmeetup.dto.EventDto;
 import pl.sda.meetup.myownmeetup.exception.NotFoundException;
 import pl.sda.meetup.myownmeetup.repository.EventRepository;
-import pl.sda.meetup.myownmeetup.validator.DateValidator;
+import pl.sda.meetup.myownmeetup.date_and_time.DateValidator;
 
 import java.time.LocalDate;
 import java.util.*;

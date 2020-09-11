@@ -1,4 +1,4 @@
-package pl.sda.meetup.myownmeetup.validator;
+package pl.sda.meetup.myownmeetup.date_and_time;
 
 import org.springframework.stereotype.Component;
 
