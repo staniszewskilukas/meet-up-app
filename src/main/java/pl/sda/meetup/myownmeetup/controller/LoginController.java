@@ -14,7 +14,7 @@ public class LoginController {
 
     PasswordEncoder passwordEncoder;
 
-    @GetMapping("/sign-in.html")
+    @GetMapping({"/sign-in.html","sign-in","sign-in.html"})
     public String getSignIn() {
         return "sign-in.html";
     }

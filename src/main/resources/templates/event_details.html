@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.w3.org/1999/xhtml"> //Środkowa linia może być zbędna lub może przeszkadzać
 <head>
     <meta charset="UTF-8">
     <title>Event details</title>
@@ -15,12 +16,14 @@
                style="font-size:32px;font-weight:bolder;font-family:Georgia,serif;">MeetUp</a>
         </div>
         <div class="float-right">
-            <a sec:authorize="isAuthenticated()" class="btn btn-primary" type="submit" th:href="event">Dodaj wydarzenie</a>
+            <a sec:authorize="isAuthenticated()" class="btn btn-primary" type="submit" th:href="event">Dodaj
+                wydarzenie</a>
             <a sec:authorize="!isAuthenticated()" class="btn btn-primary" type="submit" th:href="sign-in.html">Zaloguj
                 się</a>
             <a sec:authorize="!isAuthenticated()" class="btn btn-primary" type="submit" th:href="registerForm.html">Zarejestruj
                 się</a>
-            <a sec:authorize="isAuthenticated()" type="submit" class="btn btn-primary" th:href="@{/logout}" th:text="Wyloguj:+'  '+${userEmail}">Wyloguj</a>
+            <a sec:authorize="isAuthenticated()" type="submit" class="btn btn-primary" th:href="@{/logout}"
+               th:text="Wyloguj:+'  '+${userEmail}">Wyloguj</a>
         </div>
     </div>
 </nav>
@@ -28,22 +31,39 @@
 <br>
 <div th:object="${eventDto}">
     <div class="form-group">
-        <div th:text="${eventDto.title}" style="text-align:center;font-size:32px;font-weight:bolder;"></div>
+        <div th:text="${eventDto.title}" style="text-align:center;font-size:32px;font-weight:bolder;text-color:black"></div>
     </div>
     <br>
-    <div class="form-group">
-        <label for="inputDateFrom" style="font-style: italic">Data rozpoczęcia</label>
-        <div th:text="${eventDto.from}" id="inputDateFrom"></div>
+    <div class="float-right" style="background-color:rgb(234, 234, 234); width:15%" >
+        <div class="form-group" style=" padding: 15px;">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock" fill="currentColor"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z"/>
+                <path fill-rule="evenodd"
+                      d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"/>
+            </svg>
+            <label for="inputDateFrom" style="font-style: italic;">Data rozpoczęcia</label>
+            <div th:text="${eventDto.from}" id="inputDateFrom"></div>
+        </div>
+        <br>
+        <div class="form-group" style=" padding: 15px;">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock" fill="currentColor"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z"/>
+                <path fill-rule="evenodd"
+                      d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"/>
+            </svg>
+            <label for="inputDateTo" style="font-style: italic">Data zakończenia</label>
+            <div th:text="${eventDto.to}" id="inputDateTo"></div>
+        </div>
     </div>
     <br>
-    <div class="form-group">
-        <label for="inputDateTo" style="font-style: italic">Data zakończenia</label>
-        <div th:text="${eventDto.to}" id="inputDateTo"></div>
-    </div>
-    <br>
-    <div class="form-group">
-        <label for="inputDescription" style="font-style: italic">Opis wydarzenia</label>
-        <textarea th:text="${eventDto.description}" class="form-control" id="inputDescription"></textarea>
+    <button class="btn btn-primary" type="button" data-toggle="collapse"
+            data-target="#inputDescription" aria-expanded="false" aria-controls="inputDescription">Opis wydarzenia
+    </button>
+    <div class="collapse" id="inputDescription">
+        <div class="card card-body" th:text="${eventDto.description}">
+        </div>
     </div>
     <br>
     <br>
