@@ -3,13 +3,14 @@ package pl.sda.meetup.myownmeetup.date_and_time;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Component
 public class DateValidator {
 
-    public boolean ifThisDateValid(LocalDate from, LocalDate to){
+    public boolean ifThisDateValid(LocalDateTime from, LocalDateTime to){
 
-        LocalDate currentDate = LocalDate.now();
+        LocalDateTime currentDate = LocalDateTime.now();
 
         if(from==null) {
             return false;
