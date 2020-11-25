@@ -12,15 +12,14 @@ public class TimeUtil implements TimeDifference{
 
     Map<String, Long> timeDiffMap = new HashMap<>();
 
-    private String determineTime(LocalDate from, LocalDate to) {
-        String result;
+    public String determineTime(LocalDate from, LocalDate to) {
         LocalDate now = LocalDate.now();
         if (now.isBefore(from)) {
-            return result = "odbędzie sie";
+            return "odbędzie sie";
         } else if (now.isBefore(to)) {
-            return result = "odbywa się";
+            return "odbywa się";
         }
-        return result = "odbywał się";
+        return "odbywał się";
     }
 
 
@@ -38,8 +37,7 @@ public class TimeUtil implements TimeDifference{
     @Override
     public String printTimePeriod(LocalDate from, LocalDate to) {
         String eventTime = determineTime(from,to);
-        StringBuilder result = new StringBuilder("Event " + eventTime);
-        return null;
+        return "Event " + eventTime;
     }
 
     @Override
