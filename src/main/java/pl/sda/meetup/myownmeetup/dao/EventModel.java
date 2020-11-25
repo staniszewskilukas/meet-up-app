@@ -4,7 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -19,10 +20,10 @@ public class EventModel {
     private String title;
 
     @Column(name = "from_date")
-    private LocalDateTime from;
+    private LocalDate from;
 
     @Column(name = "to_date")
-    private LocalDateTime to;
+    private LocalDate to;
     private String description;
 
     @ManyToOne()

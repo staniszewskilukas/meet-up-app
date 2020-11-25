@@ -61,9 +61,8 @@ public class EventController {
         return "event_details";
     }
 
-
     @PostMapping({"/comment-add/{eventDtoId}"})
-    public String addComment(@PathVariable Long eventDtoId, @ModelAttribute @Valid CommentDto commentDto, BindingResult bindingResult, Model model) {
+    public String addComment(@PathVariable Long eventDtoId, @ModelAttribute @Valid CommentDto commentDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "error";
         }

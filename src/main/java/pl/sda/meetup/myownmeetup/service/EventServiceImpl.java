@@ -11,7 +11,6 @@ import pl.sda.meetup.myownmeetup.repository.EventRepository;
 import pl.sda.meetup.myownmeetup.date_and_time.DateValidator;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -45,8 +44,8 @@ public class EventServiceImpl implements EventService {
     public List<EventModel> listOfEventsDatesValidation(List<EventModel> eventModels) {
         List<EventModel> activeEvents = new ArrayList<>();
         for (EventModel eventModel : eventModels) {
-            LocalDateTime from = eventModel.getFrom();
-            LocalDateTime to = eventModel.getTo();
+            LocalDate from = eventModel.getFrom();
+            LocalDate to = eventModel.getTo();
             if (dateValidator.ifThisDateValid(from, to)) {
                 activeEvents.add(eventModel);
             }

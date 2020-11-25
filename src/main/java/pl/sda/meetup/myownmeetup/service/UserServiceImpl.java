@@ -32,7 +32,6 @@ public class UserServiceImpl implements UserService {
 
     public String getLoggedUserName() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        log.info("Tojest wynik metody zwracającej zalogowanego użytkownika " + authentication.getName());
         if (authentication instanceof AnonymousAuthenticationToken) {
             return null;
         }

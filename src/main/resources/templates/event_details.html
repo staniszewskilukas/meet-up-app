@@ -2,7 +2,7 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:sec="http://www.w3.org/1999/xhtml"> //Środkowa linia może być zbędna lub może przeszkadzać
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Event details</title>
@@ -12,18 +12,16 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="float-left">
-            <a class="navbar-brand" th:href="homePage.html"
+            <a class="navbar-brand" th:href="@{~/homePage.html}"
                style="font-size:32px;font-weight:bolder;font-family:Georgia,serif;">MeetUp</a>
         </div>
         <div class="float-right">
-            <a sec:authorize="isAuthenticated()" class="btn btn-primary" type="submit" th:href="event">Dodaj
-                wydarzenie</a>
-            <a sec:authorize="!isAuthenticated()" class="btn btn-primary" type="submit" th:href="sign-in.html">Zaloguj
+            <a sec:authorize="isAuthenticated()" class="btn btn-primary" type="submit" th:href="@{~/event.html}">Dodaj wydarzenie</a>
+            <a sec:authorize="!isAuthenticated()" class="btn btn-primary" type="submit" th:href="@{~/sign-in.html}">Zaloguj
                 się</a>
-            <a sec:authorize="!isAuthenticated()" class="btn btn-primary" type="submit" th:href="registerForm.html">Zarejestruj
+            <a sec:authorize="!isAuthenticated()" class="btn btn-primary" type="submit" th:href="@{~/registerForm.html}">Zarejestruj
                 się</a>
-            <a sec:authorize="isAuthenticated()" type="submit" class="btn btn-primary" th:href="@{/logout}">Wyloguj</a>
-<!--               th:text="Wyloguj:+'  '+${userEmail}"-->
+            <a sec:authorize="isAuthenticated()" type="submit" class="btn btn-primary" th:href="@{/logout}"    >Wyloguj</a>
         </div>
     </div>
 </nav>
@@ -65,43 +63,44 @@
         <div class="card card-body" th:text="${eventDto.description}">
         </div>
     </div>
+</div>
     <br>
     <br>
     <!--    ----------------------------------------------------------------------------------------------------------->
-    <form method="post" th:actions="@{'/comment-add/' + ${eventDto.id}}" th:object="${commentDto}">
-        <div>
-            <div class="form-group">
-                <label for="inputComment" style="font-style: italic">Dodaj komentarz</label>
-                <input class="form-control" type="text" name="content" placeholder="Zaloguj się by dodać komentarz"
-                       id="inputComment">
-                <small class="form-text text-muted">Maksymalna długość komentarza - 500 znaków.</small>
-            </div>
+<!--    <form method="post" th:actions="@{'/comment-add/' + ${eventDto.id}}" th:object="${commentDto}">-->
+<!--        <div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="inputComment" style="font-style: italic">Dodaj komentarz</label>-->
+<!--                <input class="form-control" type="text" name="content" placeholder="Zaloguj się by dodać komentarz"-->
+<!--                       id="inputComment">-->
+<!--                <small class="form-text text-muted">Maksymalna długość komentarza - 500 znaków.</small>-->
+<!--            </div>-->
 
-            <button sec:authorize="isAuthenticated()" type="submit"
-                    class="btn btn-primary">
-                Dodaj komentarz
-            </button>
-        </div>
-    </form>
-    <form method="post" th:actions="@{/user-to-event-add}">
-        <div>
-            <button sec:authorize="isAuthenticated()" type="submit"
-                    class="btn btn-primary">
-                Dopisz się do wydarzenia
-            </button>
-        </div>
-    </form>
-    <!--    -------------------------------------------------------------------------------------------------------------->
-    <form>
-        <table class="table table-striped" th:each="listElement : ${commentsList}">
-            <tbody>
-            <tr>
-                <td th:text="${listElement.getContent()}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </form>
-</div>
+<!--            <button sec:authorize="isAuthenticated()" type="submit"-->
+<!--                    class="btn btn-primary">-->
+<!--                Dodaj komentarz-->
+<!--            </button>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--    <form method="post" th:actions="@{/user-to-event-add}">-->
+<!--        <div>-->
+<!--            <button sec:authorize="isAuthenticated()" type="submit"-->
+<!--                    class="btn btn-primary">-->
+<!--                Dopisz się do wydarzenia-->
+<!--            </button>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--    &lt;!&ndash;    &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+<!--    <form>-->
+<!--        <table class="table table-striped" th:each="listElement : ${commentsList}">-->
+<!--            <tbody>-->
+<!--            <tr>-->
+<!--                <td th:text="${listElement.getContent()}"></td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </form>-->
+
 <th:block th:replace="~{includes/generalScript::end-of-body}"></th:block>
 </body>
 </html>

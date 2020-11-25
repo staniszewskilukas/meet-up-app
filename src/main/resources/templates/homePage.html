@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
@@ -21,8 +22,6 @@
             <a sec:authorize="!isAuthenticated()" class="btn btn-primary" type="submit" th:href="registerForm.html">Zarejestruj
                 się</a>
             <a sec:authorize="isAuthenticated()" type="submit" class="btn btn-primary" th:href="@{/logout}"    >Wyloguj</a>
-<!--               th:text="Wyloguj:+'  '+${userEmail}"-->
-
         </div>
     </div>
 </nav>

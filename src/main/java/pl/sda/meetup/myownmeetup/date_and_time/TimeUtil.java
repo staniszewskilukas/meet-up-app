@@ -2,26 +2,19 @@ package pl.sda.meetup.myownmeetup.date_and_time;
 
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class TimeUtil implements TimeDifference {
+public class TimeUtil implements TimeDifference{
 
     Map<String, Long> timeDiffMap = new HashMap<>();
-    private LocalDateTime from;
-    private LocalDateTime to;
 
-    public TimeUtil(LocalDateTime from, LocalDateTime to) {
-        this.from = from;
-        this.to = to;
-    }
-
-    private String determineTime() {
+    private String determineTime(LocalDate from, LocalDate to) {
         String result;
-        LocalDateTime now = LocalDateTime.now();
+        LocalDate now = LocalDate.now();
         if (now.isBefore(from)) {
             return result = "odbędzie sie";
         } else if (now.isBefore(to)) {
@@ -31,27 +24,21 @@ public class TimeUtil implements TimeDifference {
     }
 
 
-    @Override
-    public Map<String, Long> showDifference() {
+   @Override
+    public Map<String, Long> showDifference(LocalDate from, LocalDate to) {
         long years = ChronoUnit.YEARS.between(from, to);
         long months = ChronoUnit.MONTHS.between(from, to);
         long days = ChronoUnit.DAYS.between(from, to);
-        long hours = ChronoUnit.HOURS.between(from, to);
-        long minutes = ChronoUnit.MINUTES.between(from, to);
         timeDiffMap.put("lat", years);
         timeDiffMap.put("miesiecy", months);
         timeDiffMap.put("dni", days);
-        timeDiffMap.put("godzin", hours);
-        timeDiffMap.put("minut", minutes);
         return timeDiffMap;
     }
 
     @Override
-    public String printTimePeriod() {
-        String eventTime = determineTime();
+    public String printTimePeriod(LocalDate from, LocalDate to) {
+        String eventTime = determineTime(from,to);
         StringBuilder result = new StringBuilder("Event " + eventTime);
-
-
         return null;
     }
 

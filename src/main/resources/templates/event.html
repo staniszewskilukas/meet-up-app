@@ -10,8 +10,8 @@
 </head>
 <body>
 <form method="post" th:actions="@{/event}" th:object="${eventDto}">
-    <div class="container-fluid">
-        <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
             <div class="float-left">
                 <a class="navbar-brand" th:href="homePage.html"
                    style="font-size:32px;font-weight:bolder;font-family:Georgia,serif">MeetUp</a>
@@ -19,47 +19,48 @@
             <div class="float-right" sec:authorize="isAuthenticated()">
                 <a type="submit" class="btn btn-primary" th:href="@{/logout}">Wyloguj</a>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <div sec:authorize="isAuthenticated()">
-            <div class="form-group, col-md-8">
-                <label for="inputTitle">Tytuł wydarzenia</label>
-                <input type="text" class="form-control" id="inputTitle" name="title"
-                       placeholder="Wpisz nazwę wydarzenia."
-                       th:field="*{title}">
-            </div>
+    <div sec:authorize="isAuthenticated()">
+        <div class="form-group, col-md-8">
+            <label for="inputTitle">Tytuł wydarzenia</label>
+            <input type="text" class="form-control" id="inputTitle" name="title"
+                   placeholder="Wpisz nazwę wydarzenia."
+                   th:field="*{title}">
+        </div>
 
-            <br>
+        <br>
 
-            <div class="form-group, col-md-6">
-                <label for="inputDateFrom">Data rozpoczęcia</label>
-                <input class="form-control" type="date" id="inputDateFrom" name="from"
-                       th:field="*{from}">
+        <div class="form-group, col-md-6">
+            <label for="inputDateFrom">Data rozpoczęcia</label>
+            <input class="form-control" type="date" id="inputDateFrom" name="from"
+                   th:field="*{from}">
 
-            </div>
+        </div>
 
-            <br>
+        <br>
 
-            <div class="form-group, col-md-6">
-                <label for="inputDateTo">Data zakończenia</label>
-                <input class="form-control" type="date" id="inputDateTo" name="to"
-                       th:field="*{to}">
+        <div class="form-group, col-md-6">
+            <label for="inputDateTo">Data zakończenia</label>
+            <input class="form-control" type="date" id="inputDateTo" name="to"
+                   th:field="*{to}">
 
-            </div>
+        </div>
 
-            <br>
+        <br>
 
-            <div class="form-group, col-md-8">
-                <label for="inputDescription">Opis wydarzenia</label>
-                <!--                            <input type="text" class="form-control" id="inputDescription" name="description" placeholder="Wpisz opis" th:field="*{description}">-->
-                <textarea type="text" class="form-control" name="description" id="inputDescription"
-                          placeholder="Wpisz opis"
-                          th:field="*{description}"></textarea>
-                <small class="form-text text-muted">Minimalna długość opisu - 20 znaków.</small>
-                <button type="submit" class="btn btn-primary" th:href="homePage.html">Dodaj wydarzenie</button>
-            </div>
+        <div class="form-group, col-md-8">
+            <label for="inputDescription">Opis wydarzenia</label>
+            <!--                            <input type="text" class="form-control" id="inputDescription" name="description" placeholder="Wpisz opis" th:field="*{description}">-->
+            <textarea type="text" class="form-control" name="description" id="inputDescription"
+                      placeholder="Wpisz opis"
+                      th:field="*{description}"></textarea>
+            <small class="form-text text-muted">Minimalna długość opisu - 20 znaków.</small>
+            <button type="submit" class="btn btn-primary" th:href="homePage.html">Dodaj wydarzenie</button>
         </div>
     </div>
+    <!--    </div>-->
 </form>
 <th:block th:replace="~{includes/generalScript::end-of-body}"></th:block>
 </body>
