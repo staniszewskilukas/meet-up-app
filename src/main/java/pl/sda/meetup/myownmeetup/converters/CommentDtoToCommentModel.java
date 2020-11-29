@@ -24,7 +24,7 @@ public class CommentDtoToCommentModel implements Converter<CommentDto, CommentMo
         final CommentModel commentModel = new CommentModel();
         UserModel userModel = userService.getLoggedUserModel(userService.getLoggedUserName());
         commentModel.setUserModel(userModel);
-        commentModel.setAddingData(LocalDateTime.now());
+        commentModel.setAddingData(LocalDate.now());
         commentModel.setContent(comment.getContent());
         return commentModel;
     }

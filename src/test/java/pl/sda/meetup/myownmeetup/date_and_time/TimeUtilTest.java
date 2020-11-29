@@ -13,6 +13,7 @@ import static org.junit.Assert.*;
 
 public class TimeUtilTest {
 
+
     TimeUtil timeUtil;
 
     @Before
@@ -40,7 +41,7 @@ public class TimeUtilTest {
         //when
         String determineTime = timeUtil.determineTime(from, to);
         //then
-        assertEquals("odbywa się",determineTime);
+        assertEquals("trwa",determineTime);
     }
 
     @Test

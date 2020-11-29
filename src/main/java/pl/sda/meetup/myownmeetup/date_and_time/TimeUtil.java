@@ -17,11 +17,10 @@ public class TimeUtil implements TimeDifference{
         if (now.isBefore(from)) {
             return "odbędzie sie";
         } else if (now.isBefore(to)) {
-            return "odbywa się";
+            return "trwa";
         }
         return "odbywał się";
     }
-
 
    @Override
     public Map<String, Long> showDifference(LocalDate from, LocalDate to) {

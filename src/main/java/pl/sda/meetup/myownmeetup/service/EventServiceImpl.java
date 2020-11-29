@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.sda.meetup.myownmeetup.converters.EventDtoToEventModel;
 import pl.sda.meetup.myownmeetup.converters.EventModelToEventDto;
 import pl.sda.meetup.myownmeetup.dao.EventModel;
+import pl.sda.meetup.myownmeetup.date_and_time.TimeUtil;
 import pl.sda.meetup.myownmeetup.dto.EventDto;
 import pl.sda.meetup.myownmeetup.exception.NotFoundException;
 import pl.sda.meetup.myownmeetup.repository.EventRepository;
@@ -37,6 +38,23 @@ public class EventServiceImpl implements EventService {
         }
     }
 
+    @Override
+    public List<EventModel> findEventsModelsByTitleRegardlessOfDate(String searchedTitle) {
+        return eventRepository.findByTitle(searchedTitle);
+    }
+
+    @Override
+    public EventDto findEventDtoById(Long id) {
+        Optional<EventModel> eventModel = eventRepository.findById(id);
+        return eventModel.map(eventModelToEventDto::convert)
+                .orElseThrow(() -> new NotFoundException("Szukane wydarzenie nie zostało znalezione"));
+    }
+
+    @Override
+    public EventModel findEventModelById(Long id) {
+        return eventRepository.findById(id).orElseThrow(() -> new NotFoundException("Szukane wydarzenie nie zostało znalezione"));
+    }
+
     public List<EventModel> findAllEvents() {
         return eventRepository.findAll();
     }
@@ -65,22 +83,5 @@ public class EventServiceImpl implements EventService {
             eventDtosList.add(eventModelToEventDto.convert(eventModel));
         }
         return eventDtosList;
-    }
-
-    @Override
-    public List<EventModel> findEventsModelsByTitleRegardlessOfDate(String searchedTitle) {
-        return eventRepository.findByTitle(searchedTitle);
-    }
-
-    @Override
-    public EventDto findEventDtoById(Long id) {
-        Optional<EventModel> eventModel = eventRepository.findById(id);
-        return eventModel.map(eventModelToEventDto::convert)
-                .orElseThrow(() -> new NotFoundException("Szukane wydarzenie nie zostało znalezione"));
-    }
-
-    @Override
-    public EventModel findEventModelById(Long id) {
-        return eventRepository.findById(id).orElseThrow(() -> new NotFoundException("Szukane wydarzenie nie zostało znalezione"));
     }
 }

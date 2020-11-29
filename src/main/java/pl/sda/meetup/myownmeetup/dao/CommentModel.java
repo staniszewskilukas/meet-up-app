@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 
@@ -18,7 +19,7 @@ public class CommentModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime addingData;
+    private LocalDate addingData;
 
     @Size(max = 500)
     private String content;

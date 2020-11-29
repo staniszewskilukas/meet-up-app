@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -14,12 +15,12 @@ import java.time.LocalDateTime;
 public class CommentDto {
 
     private Long id;
-    private LocalDateTime addingData;
+    private LocalDate addingData;
 
     @Size(max = 500, message = "Komentarz może mieć maksymalnie 500 znaków")
     private String content;
 
-    public CommentDto(LocalDateTime addingData) {
-        this.addingData = LocalDateTime.now();
+    public CommentDto(LocalDate addingData) {
+        this.addingData = LocalDate.now();
     }
 }

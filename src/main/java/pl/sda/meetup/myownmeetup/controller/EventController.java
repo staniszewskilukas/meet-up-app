@@ -3,10 +3,7 @@ package pl.sda.meetup.myownmeetup.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.sda.meetup.myownmeetup.dto.CommentDto;
 import pl.sda.meetup.myownmeetup.dto.EventDto;
 import pl.sda.meetup.myownmeetup.service.CommentServiceImpl;
@@ -61,8 +58,8 @@ public class EventController {
         return "event_details";
     }
 
-    @PostMapping({"/comment-add/{eventDtoId}"})
-    public String addComment(@PathVariable Long eventDtoId, @ModelAttribute @Valid CommentDto commentDto, BindingResult bindingResult) {
+    @PostMapping({"/comment_add/{eventDtoId}"})
+    public String addComment(@PathVariable Long eventDtoId, @ModelAttribute("commentDto") @Valid CommentDto commentDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "error";
         }
