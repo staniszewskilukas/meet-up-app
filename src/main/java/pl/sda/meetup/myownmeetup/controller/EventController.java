@@ -58,12 +58,21 @@ public class EventController {
         return "event_details";
     }
 
-    @PostMapping({"/comment_add/{eventDtoId}"})
-    public String addComment(@PathVariable Long eventDtoId, @ModelAttribute("commentDto") @Valid CommentDto commentDto, BindingResult bindingResult) {
+    @PostMapping({"/event_details/{eventDtoId}"})
+    public String addComment(@PathVariable Long eventDtoId, @ModelAttribute @Valid CommentDto commentDto, BindingResult bindingResult) {
+
         if (bindingResult.hasErrors()) {
             return "error";
         }
         commentService.save(commentDto, eventDtoId);
-        return "redirect:/event_details";
+        return "redirect:/homePage";
     }
+
+    @RequestMapping(name = "/event_details",value = "/{eventDtoId}",method = RequestMethod.POST)
+    public String addComment(@PathVariable Long eventDtoId, Model model){
+        CommentDto commentDto = (CommentDto)model.asMap().get("commentDto");
+        commentService.save(commentDto, eventDtoId);
+        return "redirect:/homePage";
+    }
+
 }

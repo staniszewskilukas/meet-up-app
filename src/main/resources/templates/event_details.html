@@ -80,21 +80,34 @@
             </div>
         </div>
     </div>
+    <br>
+    <br>
+    <form method="post" th:object="${commentDto}">
+        <div class="form-group, col-md-8">
+            <label for="inputComment" style="font-style: italic"></label>
+            <input class="form-control" type="text" name="content" placeholder="Zaloguj się by dodać komentarz"
+                   id="inputComment">
+            <small class="form-text text-muted">Maksymalna długość komentarza - 500 znaków.</small>
+            <br>
+            <button sec:authorize="isAuthenticated()" type="submit" class="btn btn-primary"
+                    th:href="@{'/event_details/' + ${eventDto.id}}"
+            >
+                Dodaj komentarz
+            </button>
+        </div>
+    </form>
 </div>
-<br>
-<br>
-<form method="post" th:actions="@{/comment_add/${eventDto.id}}" th:object="${commentDto}">
-    <div class="form-group, col-md-8">
-        <label for="inputComment" style="font-style: italic"></label>
-        <input class="form-control" type="text" name="content" placeholder="Zaloguj się by dodać komentarz"
-               id="inputComment">
-        <small class="form-text text-muted">Maksymalna długość komentarza - 500 znaków.</small>
-        <br>
-        <button sec:authorize="isAuthenticated()" type="submit" class="btn btn-primary">
-            Dodaj komentarz
-        </button>
+<div th:if="${not #lists.isEmpty(commentsList)}">
+    <div th:each="comment : ${commentsList}">
+        <table class="table table-dark table-striped" style="margin-right:150px;">
+            <tr>
+                <th colspan="4" style="text-align:center" width="150px">
+                    <a th:text="${comment.content}"> </a>
+                </th>
+            </tr>
+        </table>
     </div>
-</form>
+</div>
 <!--    <form method="post" th:actions="@{/user-to-event-add}">-->
 <!--        <div>-->
 <!--            <button sec:authorize="isAuthenticated()" type="submit"-->
