@@ -27,6 +27,7 @@ public class CommentServiceImpl implements CommentService {
         this.commentDtoToCommentModel = commentDtoToCommentModel;
         this.commentModelToCommentDto = commentModelToCommentDto;
         this.eventService = eventService;
+
     }
 
     @Override
@@ -43,8 +44,6 @@ public class CommentServiceImpl implements CommentService {
         CommentModel convert = commentDtoToCommentModel.convert(commentDto);
         convert.setEventModel(eventModelById);
         commentRepository.save(convert);
-
-
     }
 
     @Override
