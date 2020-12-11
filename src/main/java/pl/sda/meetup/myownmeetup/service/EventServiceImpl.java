@@ -2,17 +2,16 @@ package pl.sda.meetup.myownmeetup.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import pl.sda.meetup.myownmeetup.converters.EventDtoToEventModel;
-import pl.sda.meetup.myownmeetup.converters.EventModelToEventDto;
 import pl.sda.meetup.myownmeetup.dao.EventModel;
-import pl.sda.meetup.myownmeetup.date_and_time.TimeUtil;
-import pl.sda.meetup.myownmeetup.dto.EventDto;
+import pl.sda.meetup.myownmeetup.date_and_time.DateValidator;
 import pl.sda.meetup.myownmeetup.exception.NotFoundException;
 import pl.sda.meetup.myownmeetup.repository.EventRepository;
-import pl.sda.meetup.myownmeetup.date_and_time.DateValidator;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -36,12 +35,11 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public EventModel findEventDtoById(Long id) {
+    public EventModel findEventById(Long id) {
         Optional<EventModel> eventModel = eventRepository.findById(id);
         return eventModel.orElseThrow(() -> new NotFoundException("Szukane wydarzenie nie zostało znalezione"));
     }
 
-    @Override
     public EventModel findEventModelById(Long id) {
         return eventRepository.findById(id).orElseThrow(() -> new NotFoundException("Szukane wydarzenie nie zostało znalezione"));
     }

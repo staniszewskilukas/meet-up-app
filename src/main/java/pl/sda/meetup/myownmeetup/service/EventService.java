@@ -9,7 +9,5 @@ public interface EventService {
 
     List<EventModel> findEventsModelsByTitleRegardlessOfDate(String searchedTitle);
 
-    EventModel findEventDtoById(Long id);
-
-    EventModel findEventModelById(Long id);
+    EventModel findEventById(Long id);
 }

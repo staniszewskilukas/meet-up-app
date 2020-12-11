@@ -10,6 +10,7 @@ import pl.sda.meetup.myownmeetup.service.EventServiceImpl;
 import pl.sda.meetup.myownmeetup.service.UserServiceImpl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Controller
@@ -27,8 +28,8 @@ public class SearchResultsController {
 
     @GetMapping({"/searchResults","/searchResults.html"})
     public String showEventByTitle(@RequestParam(name = "title") String title, Model model) {
-        Stream<EventDto> eventDtoList = eventService.sortsListOfEventsModels(
-                eventService.findEventsModelsByTitleRegardlessOfDate(title)).stream().map(converter::convert);
+        List<EventDto> eventDtoList = eventService.sortsListOfEventsModels(
+                eventService.findEventsModelsByTitleRegardlessOfDate(title)).stream().map(converter::convert).collect(Collectors.toList());
         model.addAttribute("title",title);
         model.addAttribute("list",eventDtoList);
         model.addAttribute("userEmail", userService.getLoggedUserName());

@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.meetup.myownmeetup.converters.CommentDtoToCommentModel;
 import pl.sda.meetup.myownmeetup.converters.EventDtoToEventModel;
+import pl.sda.meetup.myownmeetup.converters.EventModelToEventDto;
 import pl.sda.meetup.myownmeetup.dao.CommentModel;
 import pl.sda.meetup.myownmeetup.dao.EventModel;
 import pl.sda.meetup.myownmeetup.dto.CommentDto;
@@ -22,14 +23,16 @@ public class EventController {
     private final EventServiceImpl eventService;
     private final UserServiceImpl userService;
     private final CommentServiceImpl commentService;
-    private final EventDtoToEventModel eventConverter;
+    private final EventDtoToEventModel eventDtoToEventModel;
+    private final EventModelToEventDto eventModelToEventDto;
     private final CommentDtoToCommentModel commentConverter;
 
-    public EventController(EventServiceImpl eventService, UserServiceImpl userService, CommentServiceImpl commentService, EventDtoToEventModel eventConverter, CommentDtoToCommentModel commentConverter) {
+    public EventController(EventServiceImpl eventService, UserServiceImpl userService, CommentServiceImpl commentService, EventDtoToEventModel eventDtoToEventModel, EventModelToEventDto eventModelToEventDto, CommentDtoToCommentModel commentConverter) {
         this.eventService = eventService;
         this.userService = userService;
         this.commentService = commentService;
-        this.eventConverter = eventConverter;
+        this.eventDtoToEventModel = eventDtoToEventModel;
+        this.eventModelToEventDto = eventModelToEventDto;
         this.commentConverter = commentConverter;
     }
 
@@ -46,7 +49,7 @@ public class EventController {
         if (bindingResult.hasErrors()) {
             System.out.println("Wal sie");//TODO
         }
-        EventModel event = eventConverter.convert(eventDto);
+        EventModel event = eventDtoToEventModel.convert(eventDto);
         eventService.save(event);
         return "redirect:/homePage";
     }
@@ -61,7 +64,8 @@ public class EventController {
 
     @GetMapping({"/event_details/{eventDtoId}"})
     public String showEventDetails(@PathVariable Long eventDtoId, Model model) {
-        model.addAttribute("eventDto", eventService.findEventDtoById(eventDtoId));
+        EventModel eventById = eventService.findEventById(eventDtoId);
+        model.addAttribute("eventDto", eventModelToEventDto.convert(eventById));
         model.addAttribute("userEmail", userService.getLoggedUserName());
         model.addAttribute("commentsList", commentService.findAllCommentsByEventId(eventDtoId));
         return "event_details";
