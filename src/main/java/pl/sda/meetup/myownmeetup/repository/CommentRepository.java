@@ -1,5 +1,6 @@
 package pl.sda.meetup.myownmeetup.repository;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import pl.sda.meetup.myownmeetup.dao.CommentModel;
 
@@ -14,5 +15,8 @@ public interface CommentRepository extends CrudRepository<CommentModel, Long> {
     @Override
     List<CommentModel> findAll();
 
+    @Query
     List<CommentModel> findAllById(Long id);
+
+
 }

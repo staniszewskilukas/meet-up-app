@@ -6,6 +6,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import pl.sda.meetup.myownmeetup.converters.UserDtoToUserModel;
+import pl.sda.meetup.myownmeetup.dao.UserModel;
 import pl.sda.meetup.myownmeetup.dto.UserDto;
 import pl.sda.meetup.myownmeetup.service.UserServiceImpl;
 
@@ -16,9 +18,11 @@ import javax.validation.Valid;
 public class RegisterController {
 
     private final UserServiceImpl userService;
+    private final UserDtoToUserModel userConverter;
 
-    public RegisterController(UserServiceImpl userService) {
+    public RegisterController(UserServiceImpl userService, UserDtoToUserModel userConverter) {
         this.userService = userService;
+        this.userConverter = userConverter;
     }
 
     @GetMapping({"/registerForm", "/registerForm.html"})
@@ -33,7 +37,8 @@ public class RegisterController {
         if (bindingResult.hasErrors()) {
             return "registerForm";
         }
-        userService.save(userDto);
+        UserModel userModel = userConverter.convert(userDto);
+        userService.save(userModel);
         return "redirect:/event";
     }
 

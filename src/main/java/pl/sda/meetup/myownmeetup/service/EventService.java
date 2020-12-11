@@ -7,11 +7,9 @@ import java.util.List;
 
 public interface EventService {
 
-    void save(EventDto eventDto);
-
     List<EventModel> findEventsModelsByTitleRegardlessOfDate(String searchedTitle);
 
-    EventDto findEventDtoById(Long id);
+    EventModel findEventDtoById(Long id);
 
     EventModel findEventModelById(Long id);
 }

@@ -22,13 +22,13 @@ public class CommentServiceImplTest {
     @Test
     public void save() {
         //given
-        CommentDto commentDto = new CommentDto();
-        commentDto.setId(100L);
-        commentDto.setContent("Treść testowa");
+        CommentModel comment = new CommentModel();
+        comment.setId(100L);
+        comment.setContent("Treść testowa");
         //when
-        commentService.save(commentDto, 1L);
+        commentService.save(comment, 1L);
         //then
-        Mockito.verify(commentService, times(1)).save(commentDto, 1L);
+        Mockito.verify(commentService, times(1)).save(comment, 1L);
     }
 
     @Test

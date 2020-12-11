@@ -15,19 +15,11 @@ import pl.sda.meetup.myownmeetup.repository.UserRepository;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final UserDtoToUserModel userDtoToUserModel;
     private final RoleServiceImpl roleService;
 
-    public UserServiceImpl(UserRepository userRepository, UserDtoToUserModel userDtoToUserModel, RoleServiceImpl roleService) {
+    public UserServiceImpl(UserRepository userRepository, RoleServiceImpl roleService) {
         this.userRepository = userRepository;
-        this.userDtoToUserModel = userDtoToUserModel;
         this.roleService = roleService;
-    }
-
-    @Override
-    public void save(UserDto userDto) {
-        UserModel userModel = userDtoToUserModel.convert(userDto);
-        userRepository.save(userModel);
     }
 
     public String getLoggedUserName() {
@@ -45,6 +37,10 @@ public class UserServiceImpl implements UserService {
 
     public UserModel getLoggedUserModel(String email){
         return userRepository.findByEmail(email);
+    }
+
+    public UserModel save(UserModel user){
+        return userRepository.save(user);
     }
 
 

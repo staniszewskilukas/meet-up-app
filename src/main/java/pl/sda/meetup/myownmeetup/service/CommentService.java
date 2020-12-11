@@ -1,5 +1,6 @@
 package pl.sda.meetup.myownmeetup.service;
 
+import org.springframework.data.jpa.repository.Query;
 import pl.sda.meetup.myownmeetup.dao.CommentModel;
 import pl.sda.meetup.myownmeetup.dto.CommentDto;
 import pl.sda.meetup.myownmeetup.repository.CommentRepository;
@@ -8,11 +9,11 @@ import java.util.List;
 
 public interface CommentService {
 
-    void save(CommentDto commentDto, Long eventId);
+    CommentModel save(CommentModel commentDto, Long eventId);
 
-    CommentDto findCommentById(Long id);
+    CommentModel findCommentById(Long id);
 
-    List<CommentDto> findAllComments();
+    List<CommentModel> findAllComments();
 
-    List<CommentDto> findAllCommentsByEventId(Long eventId);
+    List<CommentModel> findAllCommentsByEventId(Long eventId);
 }

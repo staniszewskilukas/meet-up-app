@@ -25,7 +25,7 @@ public class UserServiceImplTest {
 
     @Before
     public void executeBeforeEach() {
-        userService = new UserServiceImpl(userRepository, userDtoToUserModel, roleService);
+        userService = new UserServiceImpl(userRepository, roleService);
     }
 
     @Test

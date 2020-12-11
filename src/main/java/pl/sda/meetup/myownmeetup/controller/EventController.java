@@ -4,6 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pl.sda.meetup.myownmeetup.converters.CommentDtoToCommentModel;
+import pl.sda.meetup.myownmeetup.converters.EventDtoToEventModel;
+import pl.sda.meetup.myownmeetup.dao.CommentModel;
+import pl.sda.meetup.myownmeetup.dao.EventModel;
 import pl.sda.meetup.myownmeetup.dto.CommentDto;
 import pl.sda.meetup.myownmeetup.dto.EventDto;
 import pl.sda.meetup.myownmeetup.service.CommentServiceImpl;
@@ -18,11 +22,15 @@ public class EventController {
     private final EventServiceImpl eventService;
     private final UserServiceImpl userService;
     private final CommentServiceImpl commentService;
+    private final EventDtoToEventModel eventConverter;
+    private final CommentDtoToCommentModel commentConverter;
 
-    public EventController(EventServiceImpl eventService, UserServiceImpl userService, CommentServiceImpl commentService) {
+    public EventController(EventServiceImpl eventService, UserServiceImpl userService, CommentServiceImpl commentService, EventDtoToEventModel eventConverter, CommentDtoToCommentModel commentConverter) {
         this.eventService = eventService;
         this.userService = userService;
         this.commentService = commentService;
+        this.eventConverter = eventConverter;
+        this.commentConverter = commentConverter;
     }
 
     @GetMapping("/event")
@@ -38,7 +46,8 @@ public class EventController {
         if (bindingResult.hasErrors()) {
             System.out.println("Wal sie");//TODO
         }
-        eventService.save(eventDto);
+        EventModel event = eventConverter.convert(eventDto);
+        eventService.save(event);
         return "redirect:/homePage";
     }
 
@@ -64,15 +73,10 @@ public class EventController {
         if (bindingResult.hasErrors()) {
             return "error";
         }
-        commentService.save(commentDto, eventDtoId);
+        CommentModel commentModel = commentConverter.convert(commentDto);
+        commentService.save(commentModel, eventDtoId);
         return "redirect:/homePage";
     }
 
-    @RequestMapping(name = "/event_details",value = "/{eventDtoId}",method = RequestMethod.POST)
-    public String addComment(@PathVariable Long eventDtoId, Model model){
-        CommentDto commentDto = (CommentDto)model.asMap().get("commentDto");
-        commentService.save(commentDto, eventDtoId);
-        return "redirect:/homePage";
-    }
 
 }

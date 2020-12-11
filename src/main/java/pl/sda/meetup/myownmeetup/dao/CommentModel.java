@@ -31,7 +31,4 @@ public class CommentModel {
     @ManyToOne
     @JoinColumn(name = "event_id")
     private EventModel eventModel;
-
-
-
 }

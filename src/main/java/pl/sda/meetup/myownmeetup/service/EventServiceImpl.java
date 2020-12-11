@@ -19,23 +19,15 @@ import java.util.*;
 public class EventServiceImpl implements EventService {
 
     private final EventRepository eventRepository;
-    private final EventDtoToEventModel eventDtoToEventModel;
     private final DateValidator dateValidator;
-    private final EventModelToEventDto eventModelToEventDto;
 
-    public EventServiceImpl(EventRepository eventRepository, EventDtoToEventModel eventDtoToEventModel, DateValidator dateValidator, EventModelToEventDto eventModelToEventDto) {
+    public EventServiceImpl(EventRepository eventRepository, DateValidator dateValidator) {
         this.eventRepository = eventRepository;
-        this.eventDtoToEventModel = eventDtoToEventModel;
         this.dateValidator = dateValidator;
-        this.eventModelToEventDto = eventModelToEventDto;
     }
 
-    @Override
-    public void save(EventDto eventDto) {
-        EventModel eventModel = eventDtoToEventModel.convert(eventDto);
-        if(eventModel!=null){
-            eventRepository.save(eventModel);
-        }
+    public EventModel save(EventModel event) {
+        return eventRepository.save(event);
     }
 
     @Override
@@ -44,10 +36,9 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public EventDto findEventDtoById(Long id) {
+    public EventModel findEventDtoById(Long id) {
         Optional<EventModel> eventModel = eventRepository.findById(id);
-        return eventModel.map(eventModelToEventDto::convert)
-                .orElseThrow(() -> new NotFoundException("Szukane wydarzenie nie zostało znalezione"));
+        return eventModel.orElseThrow(() -> new NotFoundException("Szukane wydarzenie nie zostało znalezione"));
     }
 
     @Override
@@ -75,13 +66,5 @@ public class EventServiceImpl implements EventService {
         Comparator<EventModel> eventModelComparator = Comparator.comparing(EventModel::getFrom);
         eventModels.sort(eventModelComparator);
         return eventModels;
-    }
-
-    public List<EventDto> getListOfEventsDto(List<EventModel> eventModels) {
-        List<EventDto> eventDtosList = new ArrayList<>();
-        for (EventModel eventModel : eventModels) {
-            eventDtosList.add(eventModelToEventDto.convert(eventModel));
-        }
-        return eventDtosList;
     }
 }
