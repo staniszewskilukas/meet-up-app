@@ -16,10 +16,10 @@ public class TimeUtil implements TimeDifference{
         LocalDate now = LocalDate.now();
         if (now.isBefore(from)) {
             return "odbędzie sie";
-        } else if (now.isBefore(to)) {
+        } else if (now.isBefore(to)||now.isEqual(to)) {
             return "trwa";
         }
-        return "odbywał się";
+        return "zakończył się";
     }
 
    @Override
