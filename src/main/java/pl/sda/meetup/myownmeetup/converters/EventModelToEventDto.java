@@ -25,7 +25,7 @@ public class EventModelToEventDto implements Converter<EventModel, EventDto>{
         eventDto.setTo(eventModel.getTo());
         eventDto.setDescription(eventModel.getDescription());
         eventDto.setEventInTime(timeUtil.printTimePeriod(eventModel.getFrom(),eventModel.getTo()));
-        timeUtil.showDifference(eventModel.getFrom(),eventModel.getTo());
+        timeUtil.showTimeDifference(eventModel.getFrom(),eventModel.getTo());
         eventDto.setTimeToEnd(timeUtil.printTimeToEnd());
         return eventDto;
     }

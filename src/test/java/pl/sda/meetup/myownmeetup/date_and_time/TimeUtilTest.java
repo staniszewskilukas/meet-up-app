@@ -61,7 +61,7 @@ public class TimeUtilTest {
         LocalDate from = LocalDate.now();
         LocalDate to = LocalDate.now().plusDays(15);
         //when
-        Map<String, Long> stringLongMap = timeUtil.showDifference(from, to);
+        Map<String, Long> stringLongMap = timeUtil.showTimeDifference(from, to);
         String key = null;
         Long value = null;
         for (Map.Entry<String, Long> stringLongEntry : stringLongMap.entrySet()) {
@@ -93,7 +93,7 @@ public class TimeUtilTest {
         LocalDate from = LocalDate.now().minusDays(1);
         LocalDate to = LocalDate.now().plusDays(10);
         //when
-        timeUtil.showDifference(from, to);
+        timeUtil.showTimeDifference(from, to);
         String timeToEnd = timeUtil.printTimeToEnd();
         //then
         assertEquals("Do zakończenia eventu pozostało 11 dni,",timeToEnd);

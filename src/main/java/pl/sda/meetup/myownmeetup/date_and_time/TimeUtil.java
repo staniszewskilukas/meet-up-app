@@ -23,14 +23,30 @@ public class TimeUtil implements TimeDifference{
     }
 
    @Override
-    public Map<String, Long> showDifference(LocalDate from, LocalDate to) {
+    public Map<String, Long> showTimeDifference(LocalDate from, LocalDate to) {
         long years = ChronoUnit.YEARS.between(from, to);
         long months = ChronoUnit.MONTHS.between(from, to);
         long days = ChronoUnit.DAYS.between(from, to);
-        timeDiffMap.put("lat", years);
-        timeDiffMap.put("miesiecy", months);
-        timeDiffMap.put("dni", days);
-        return timeDiffMap;
+       namesTimeDifferences(years, months, days);
+       return timeDiffMap;
+    }
+
+    private void namesTimeDifferences(long years, long months, long days) {
+        if(years==1){
+            timeDiffMap.put("rok", years);
+        }else {
+            timeDiffMap.put("lat", years);
+        }
+        if(months==1){
+            timeDiffMap.put("miesiąc", years);
+        }else {
+            timeDiffMap.put("miesiecy", months);
+        }
+        if(days==1){
+            timeDiffMap.put("dzień", years);
+        }else {
+            timeDiffMap.put("dni", days);
+        }
     }
 
     @Override
@@ -41,14 +57,13 @@ public class TimeUtil implements TimeDifference{
 
     @Override
     public String printTimeToEnd() {
-        StringBuilder result = new StringBuilder("Do zakończenia eventu pozostało");
+        StringBuilder result = new StringBuilder("Do zakończenia eventu pozostało:");
         for (Map.Entry<String, Long> entry : timeDiffMap.entrySet()) {
             if (entry.getValue() != 0) {
                 result.append(" ")
                         .append(entry.getValue())
                         .append(" ")
-                        .append(entry.getKey())
-                        .append(",");
+                        .append(entry.getKey());
             }
         }
         return result.toString();

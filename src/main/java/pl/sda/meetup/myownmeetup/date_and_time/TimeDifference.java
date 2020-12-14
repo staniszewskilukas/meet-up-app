@@ -6,6 +6,6 @@ import java.util.Map;
 
 public interface TimeDifference extends PrintTime {
 
-    Map<String, Long> showDifference(LocalDate from, LocalDate to);
+    Map<String, Long> showTimeDifference(LocalDate from, LocalDate to);
 
 }
