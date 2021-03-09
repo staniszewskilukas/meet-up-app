@@ -30,7 +30,7 @@ public class TimeUtilTest {
         //when
         String determineTime = timeUtil.determineTime(from, to);
         //then
-        assertEquals("odbywał się",determineTime);
+        assertEquals("zakończył się",determineTime);
     }
 
     @Test
@@ -84,7 +84,7 @@ public class TimeUtilTest {
         //when
         String timePeriod = timeUtil.printTimePeriod(from, to);
         //then
-        assertEquals("Event odbywa się", timePeriod);
+        assertEquals("Event trwa", timePeriod);
     }
 
     @Test
@@ -96,6 +96,6 @@ public class TimeUtilTest {
         timeUtil.showTimeDifference(from, to);
         String timeToEnd = timeUtil.printTimeToEnd();
         //then
-        assertEquals("Do zakończenia eventu pozostało 11 dni,",timeToEnd);
+        assertEquals("Do zakończenia eventu pozostało: 11 dni",timeToEnd);
     }
 }
