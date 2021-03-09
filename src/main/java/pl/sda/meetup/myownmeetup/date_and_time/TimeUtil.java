@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class TimeUtil implements TimeDifference{
+public class TimeUtil implements TimeDifference {
 
     Map<String, Long> timeDiffMap = new HashMap<>();
 
@@ -16,34 +16,38 @@ public class TimeUtil implements TimeDifference{
         LocalDate now = LocalDate.now();
         if (now.isBefore(from)) {
             return "odbędzie sie";
-        } else if (now.isBefore(to)||now.isEqual(to)) {
+        } else if (now.isBefore(to) || now.isEqual(to)) {
             return "trwa";
         }
         return "zakończył się";
     }
 
-   @Override
+    @Override
     public Map<String, Long> showTimeDifference(LocalDate from, LocalDate to) {
         long years = ChronoUnit.YEARS.between(from, to);
         long months = ChronoUnit.MONTHS.between(from, to);
         long days = ChronoUnit.DAYS.between(from, to);
-       namesTimeDifferences(years, months, days);
-       return timeDiffMap;
+        namesTimeDifferences(years, months, days);
+        return timeDiffMap;
     }
 
     private void namesTimeDifferences(long years, long months, long days) {
-        if(years==1){
+        if (years == 1) {
             timeDiffMap.put("rok", years);
-        }else {
+        } else if (years > 1 && years < 5) {
+            timeDiffMap.put("lata", years);
+        } else {
             timeDiffMap.put("lat", years);
         }
-        if(months==1){
-            timeDiffMap.put("miesiąc", years);
-        }else {
+        if (months == 1) {
+            timeDiffMap.put("miesiąc", months);
+        } else if (months > 1 && months < 5) {
+            timeDiffMap.put("miesiące", months);
+        } else {
             timeDiffMap.put("miesiecy", months);
         }
-        if(days==1){
-            timeDiffMap.put("dzień", years);
+        if (days == 1) {
+            timeDiffMap.put("dzień", days);
         }else {
             timeDiffMap.put("dni", days);
         }
@@ -51,7 +55,7 @@ public class TimeUtil implements TimeDifference{
 
     @Override
     public String printTimePeriod(LocalDate from, LocalDate to) {
-        String eventTime = determineTime(from,to);
+        String eventTime = determineTime(from, to);
         return "Event " + eventTime;
     }
 

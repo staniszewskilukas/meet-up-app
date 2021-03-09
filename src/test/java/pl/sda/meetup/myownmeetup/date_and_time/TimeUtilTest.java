@@ -56,7 +56,7 @@ public class TimeUtilTest {
     }
 
     @Test
-    public void showDifference() {
+    public void showDifference() { //TODO ta metoda źle działa więc albo test jest do dupy albo więcej testów
         //given
         LocalDate from = LocalDate.now();
         LocalDate to = LocalDate.now().plusDays(15);
@@ -98,4 +98,6 @@ public class TimeUtilTest {
         //then
         assertEquals("Do zakończenia eventu pozostało: 11 dni",timeToEnd);
     }
+
+    //TODO zrobić test metody namesTimeDifferences
 }
