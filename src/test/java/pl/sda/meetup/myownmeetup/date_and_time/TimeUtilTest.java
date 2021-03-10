@@ -55,8 +55,34 @@ public class TimeUtilTest {
         assertEquals("odbędzie sie",determineTime);
     }
 
+    //---------------------------------------powyżej ok---------------------------------------------------------------//
+
+    @Test
+    public void countPeriod_EventLast3Months_WillCountAmountOfMonths(){
+
+    }
+
+    @Test
+    public void countPeriod_EventLast12Days_WillCountAmountOfDays(){
+
+    }
+
+    @Test
+    public void countPeriod_EventLast6MonthsAnd12Days_WillCountAmountOfMonthsDays(){
+
+    }
+
+    @Test
+    public void countPeriod_EventLast2Years6Months12Days_WillCountAmountOfYearsMonthsDays(){
+
+    }
+
+
+
     @Test
     public void showDifference() { //TODO ta metoda źle działa więc albo test jest do dupy albo więcej testów
+        //TODO tu dodać funkcjonalność że jeśli event jeszcze się nie zaczął to liczy czas do początku a jeśli ju trwa to liczy czas do zakończenia, jeśli się zakończył to liczy czas do zakończenia wstecz
+        //TODO dla zakończonych eventów zrobić osobną metodę liczącą
         //given
         LocalDate from = LocalDate.now();
         LocalDate to = LocalDate.now().plusDays(15);
@@ -75,6 +101,21 @@ public class TimeUtilTest {
         assertEquals(15, (long) value);
         Assert.assertEquals("15dni", result);
     }
+
+    @Test
+    public void methodName_EventEnded2MonthsEgo_WillCountAndPrintTimeFormNowToEventEnd(){
+        //given
+        LocalDate start = LocalDate.now().minusMonths(6);
+        LocalDate end = LocalDate.now().minusMonths(2);
+        //when
+        Map<String, Long> stringLongMap = timeUtil.showTimeDifference(start, end);
+        String expected =timeUtil.printTime();
+        //then
+        assertEquals("Event zakończył się 2 miesiące temu", stringLongMap);
+
+    }
+
+    //TODO zrobić metodę wyliczającą czas trwania eventu
 
     @Test
     public void printTimePeriod() {
